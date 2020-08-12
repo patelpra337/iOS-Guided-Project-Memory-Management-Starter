@@ -21,20 +21,30 @@
     return self;
 }
 
-// TODO: Implement autoreleased class car method
++ (instancetype)car
+{
+    return [self carWithMake:@"Toyota"];
+}
 
++ (instancetype)carWithMake:(NSString *)make
+{
+    Car *car = [[self alloc] initWithMake:make];
+    return [car autorelease];
+}
 
 - (void)dealloc
 {
     NSLog(@"-[Car dealloc]: %@", self);
-    // TODO: Implement dealloc with MRC
+    
+    [_make release];
+    [super dealloc];
 }
 
 - (NSString *)description
 {
     // TODO: Implement a standard autoreleasing method.
     NSString *description = [[NSString alloc] initWithFormat:@"Car: %@", self.make];
-    return description;
+    return [description autorelease];
 }
 
 @end
